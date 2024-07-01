@@ -1,0 +1,92 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Configuration {
+  configName  String?
+  configValue String?
+  createdAt   DateTime @default(now())
+  id          String   @id @default(cuid())
+  updatedAt   DateTime @updatedAt
+}
+
+model DmcaRequest {
+  content         Content?                      @relation(fields: [contentId], references: [id])
+  contentId       String?
+  createdAt       DateTime                      @default(now())
+  id              String                        @id @default(cuid())
+  logs            Log[]
+  platformContact String?
+  requestDate     DateTime?
+  requestStatus   EnumDmcaRequestRequestStatus?
+  updatedAt       DateTime                      @updatedAt
+}
+
+model Platform {
+  contents    Content[]
+  createdAt   DateTime  @default(now())
+  id          String    @id @default(cuid())
+  lastScraped DateTime?
+  name        String?
+  updatedAt   DateTime  @updatedAt
+  url         String?
+}
+
+model Content {
+  contentType  EnumContentContentType?
+  contentUrl   String?
+  createdAt    DateTime                @default(now())
+  dmcaRequests DmcaRequest[]
+  fingerprint  Json?
+  foundAt      DateTime?
+  id           String                  @id @default(cuid())
+  logs         Log[]
+  platform     Platform?               @relation(fields: [platformId], references: [id])
+  platformId   String?
+  updatedAt    DateTime                @updatedAt
+}
+
+model Log {
+  content       Content?        @relation(fields: [contentId], references: [id])
+  contentId     String?
+  createdAt     DateTime        @default(now())
+  dmcaRequest   DmcaRequest?    @relation(fields: [dmcaRequestId], references: [id])
+  dmcaRequestId String?
+  id            String          @id @default(cuid())
+  logDate       DateTime?
+  logType       EnumLogLogType?
+  message       String?
+  updatedAt     DateTime        @updatedAt
+}
+
+model ScrapingConfiguration {
+  additionalParams Json?
+  createdAt        DateTime                         @default(now())
+  id               String                           @id @default(cuid())
+  platform         String?
+  scrapeDepth      Int?
+  status           EnumScrapingConfigurationStatus?
+  updatedAt        DateTime                         @updatedAt
+  url              String?
+}
+
+enum EnumDmcaRequestRequestStatus {
+  Option1
+}
+
+enum EnumContentContentType {
+  Option1
+}
+
+enum EnumLogLogType {
+  Option1
+}
+
+enum EnumScrapingConfigurationStatus {
+  Option1
+}
