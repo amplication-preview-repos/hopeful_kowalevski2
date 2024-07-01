@@ -25,6 +25,10 @@ import { LogList } from "./log/LogList";
 import { LogCreate } from "./log/LogCreate";
 import { LogEdit } from "./log/LogEdit";
 import { LogShow } from "./log/LogShow";
+import { ScrapingConfigurationList } from "./scrapingConfiguration/ScrapingConfigurationList";
+import { ScrapingConfigurationCreate } from "./scrapingConfiguration/ScrapingConfigurationCreate";
+import { ScrapingConfigurationEdit } from "./scrapingConfiguration/ScrapingConfigurationEdit";
+import { ScrapingConfigurationShow } from "./scrapingConfiguration/ScrapingConfigurationShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -85,6 +89,13 @@ const App = (): React.ReactElement => {
           edit={LogEdit}
           create={LogCreate}
           show={LogShow}
+        />
+        <Resource
+          name="ScrapingConfiguration"
+          list={ScrapingConfigurationList}
+          edit={ScrapingConfigurationEdit}
+          create={ScrapingConfigurationCreate}
+          show={ScrapingConfigurationShow}
         />
       </Admin>
     </div>

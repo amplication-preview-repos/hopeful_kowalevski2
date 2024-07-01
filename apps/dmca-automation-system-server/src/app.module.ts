@@ -19,6 +19,8 @@ import { DmcaRequestModule } from "./dmcaRequest/dmcaRequest.module";
 import { PlatformModule } from "./platform/platform.module";
 import { ContentModule } from "./content/content.module";
 import { LogModule } from "./log/log.module";
+import { ScrapingConfigurationModule } from "./scrapingConfiguration/scrapingConfiguration.module";
+import { WebScrapingModule } from "./WebScraping/webscraping.module";
 import { HealthModule } from "./health/health.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { SecretsManagerModule } from "./providers/secrets/secretsManager.module";
@@ -41,6 +43,8 @@ import { LoggerModule } from "./logger/logger.module";
     PlatformModule,
     ContentModule,
     LogModule,
+    ScrapingConfigurationModule,
+    WebScrapingModule,
     HealthModule,
     PrismaModule,
     SecretsManagerModule,

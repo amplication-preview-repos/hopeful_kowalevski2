@@ -64,6 +64,17 @@ model Log {
   updatedAt     DateTime        @updatedAt
 }
 
+model ScrapingConfiguration {
+  additionalParams Json?
+  createdAt        DateTime                         @default(now())
+  id               String                           @id @default(cuid())
+  platform         String?
+  scrapeDepth      Int?
+  status           EnumScrapingConfigurationStatus?
+  updatedAt        DateTime                         @updatedAt
+  url              String?
+}
+
 enum EnumDmcaRequestRequestStatus {
   Option1
 }
@@ -73,5 +84,9 @@ enum EnumContentContentType {
 }
 
 enum EnumLogLogType {
+  Option1
+}
+
+enum EnumScrapingConfigurationStatus {
   Option1
 }
